@@ -846,6 +846,54 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85c3e922889c5a648b85269a635063ed, type: 3}
+--- !u!1 &183761029
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 183761031}
+  - component: {fileID: 183761030}
+  m_Layer: 0
+  m_Name: Enemy2Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &183761030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 183761029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52c07dd90d357784bae2d682658a2a34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Unit: {fileID: 1074182323}
+  attack: 7
+  defense: 7
+  attackRange: 1
+  moveRange: 3
+--- !u!4 &183761031
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 183761029}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 352.66034, y: -13.971741, z: 371.57068}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &186243338 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: b23374ce21bf801408b0dd8b6df6f9ff,
@@ -5089,7 +5137,7 @@ GameObject:
   - component: {fileID: 968696906}
   m_Layer: 0
   m_Name: Party Unit 1
-  m_TagString: Untagged
+  m_TagString: Party
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5553,6 +5601,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1213110639}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1074182323 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4845141051926714430, guid: 40b2b293fffa3034282d991135376e80,
+    type: 3}
+  m_PrefabInstance: {fileID: 1735715872}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1094514120
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5622,6 +5676,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b23374ce21bf801408b0dd8b6df6f9ff, type: 3}
+--- !u!1 &1101051989 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4845141051926714430, guid: 40b2b293fffa3034282d991135376e80,
+    type: 3}
+  m_PrefabInstance: {fileID: 1258411783612893394}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1108921732
 GameObject:
   m_ObjectHideFlags: 0
@@ -8443,6 +8503,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Party Unit 2
       objectReference: {fileID: 0}
+    - target: {fileID: 2477000230518521620, guid: 4f8643b51b0b0c549b88cdb2ccb96841,
+        type: 3}
+      propertyPath: m_TagString
+      value: Party
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f8643b51b0b0c549b88cdb2ccb96841, type: 3}
 --- !u!1001 &1608278252
@@ -9441,6 +9506,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Unit 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4845141051926714430, guid: 40b2b293fffa3034282d991135376e80,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40b2b293fffa3034282d991135376e80, type: 3}
 --- !u!1001 &1737523927
@@ -9968,6 +10038,54 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1024119077}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1835830138
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1835830140}
+  - component: {fileID: 1835830139}
+  m_Layer: 0
+  m_Name: Enemy1Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1835830139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1835830138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52c07dd90d357784bae2d682658a2a34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Unit: {fileID: 1101051989}
+  attack: 7
+  defense: 7
+  attackRange: 1
+  moveRange: 3
+--- !u!4 &1835830140
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1835830138}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 352.66034, y: -13.971741, z: 371.57068}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1884233983
 GameObject:
   m_ObjectHideFlags: 0
@@ -11065,6 +11183,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Unit 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4845141051926714430, guid: 40b2b293fffa3034282d991135376e80,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40b2b293fffa3034282d991135376e80, type: 3}
 --- !u!1001 &8246543376783558092
@@ -11148,6 +11271,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Party Unit 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8246543377214333317, guid: 8a290a3d2e45fef47a8023eb4f49ef7f,
+        type: 3}
+      propertyPath: m_TagString
+      value: Party
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a290a3d2e45fef47a8023eb4f49ef7f, type: 3}
