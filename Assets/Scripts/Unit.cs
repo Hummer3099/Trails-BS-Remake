@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Unit
 {
-    public GameObject fieldUnit { get; set; }
     public int attack { get; set; }
     public int defense { get; set; }
     public int moveRange { get; set; }
