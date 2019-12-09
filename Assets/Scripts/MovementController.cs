@@ -19,7 +19,8 @@ public class MovementController : MonoBehaviour
     {
         list = UnitList.GetInstance().GetList();
         currentPlayer = list[0];
-        CheckAttack(new Vector3(1.5F, 50, -2.5F));
+        //CheckAttack(new Vector3(1.5F, 50, -2.5F));
+        CheckMove(new Vector3(-1.5F, 50, 0.5F));
     }
 
     public void CheckMove(Vector3 clickedTile)
@@ -56,9 +57,6 @@ public class MovementController : MonoBehaviour
         int difference = CalcDiff(clickedTile);
         if(difference <= currentPlayer.moveRange + currentPlayer.attackRange)
         {
-            float offset = 4.6F;
-            int clickedX = (int)(clickedTile.x + offset);
-            int clickedY = (int)(clickedTile.z + offset);
             Result currResult = new Result { distance = 9999 };
 
             Vector3 upCheck = new Vector3(clickedTile.x, clickedTile.y, clickedTile.z + 1);
@@ -119,7 +117,7 @@ public class MovementController : MonoBehaviour
 
             return new Result {destination = clickedTile, distance = distance, x = clickedX, y = clickedY };
         }
-        return new Result { distance = 9999 };
+        return new Result { distance = 99999999 };
     }
 
 }
