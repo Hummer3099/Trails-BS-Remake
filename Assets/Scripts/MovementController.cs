@@ -7,11 +7,13 @@ public class MovementController : MonoBehaviour
     List<UnitController> list;
     UnitController currentPlayer;
     Tile[,] tiles;
+    private static MovementController instance;
 
     // Start is called before the first frame update
     void Start()
     {
         tiles = MapGenerator.GetInstance().GetTiles();
+        instance = this;
     }
 
     // Update is called once per frame
@@ -20,7 +22,12 @@ public class MovementController : MonoBehaviour
         list = UnitList.GetInstance().GetList();
         currentPlayer = list[0];
         //CheckAttack(new Vector3(1.5F, 50, -2.5F));
-        CheckMove(new Vector3(-1.5F, 50, 0.5F));
+        //CheckMove(new Vector3(-1.5F, 50, 0.5F));
+    }
+
+    public static MovementController GetInstance()
+    {
+        return instance;
     }
 
     public void CheckMove(Vector3 clickedTile)

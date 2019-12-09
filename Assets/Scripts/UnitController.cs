@@ -87,6 +87,8 @@ public class UnitController : MonoBehaviour
 
     public void Move(Vector3 target)
     {
+        UpdateCoordinates();
+
         Tile[,] tiles = MapGenerator.GetInstance().GetTiles();
 
         float offset = 4.6F;
@@ -118,6 +120,8 @@ public class UnitController : MonoBehaviour
 
         tiles[currentX, currentY].unit = null;
         tiles[nextX, nexty].unit = unit;
+        UpdateCoordinates();
+
         Debug.Log("Assigned at " + nextX + " " + nexty);
     }
 
@@ -132,6 +136,15 @@ public class UnitController : MonoBehaviour
             compass.left = false;
             CheckCompass();
         }
+    }
+
+    void UpdateCoordinates()
+    {
+        float offset = 4.6F;
+        int x = (int)(Unit.transform.localPosition.x + offset);
+        int y = (int)(Unit.transform.localPosition.z + offset);
+        currentX = x;
+        currentY = y;
     }
 
     void MoveRight()
