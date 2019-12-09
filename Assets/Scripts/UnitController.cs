@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UnitController : MonoBehaviour
 {
@@ -13,9 +14,12 @@ public class UnitController : MonoBehaviour
     public int attackRange;
     public int moveRange;
     public int hp;
+    public float currentHP;
     float moveSpeed = 0.3F;
     int currentX;
     int currentY;
+    public Image HealthBar;
+    public Text HPtext;
 
     Vector3 currentTarget;
     bool isMoving = false;
@@ -32,6 +36,8 @@ public class UnitController : MonoBehaviour
     void Update()
     {
         CheckMovement();
+        UpdateHPBar();
+        UpdateHPtext();
     }
 
     void InitializeUnit()
@@ -179,5 +185,21 @@ public class UnitController : MonoBehaviour
         {
             isMoving = false;
         }
+    }
+    void UpdateHPBar()
+    {
+        float calcHP = currentHP / hp;
+        HealthBar.transform.localScale = new Vector3(Mathf.Clamp(calcHP, 0, 1), HealthBar.transform.transform.localScale.y, HealthBar.transform.transform.localScale.z);
+        if(calcHP<0.66 && calcHP > 0.33)
+        {
+            HealthBar.GetComponent<Image>().color = new Color(255, 255, 0);
+        }else if(calcHP < 0.33)
+        {
+            HealthBar.GetComponent<Image>().color = new Color(255,0, 0);
+        }
+    }
+    void UpdateHPtext()
+    {
+        HPtext.text = "HP: " + currentHP + "/" + hp;
     }
 }
