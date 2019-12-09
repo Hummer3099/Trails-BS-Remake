@@ -62,7 +62,7 @@ public class MovementController : MonoBehaviour
     public void CheckAttack(Vector3 clickedTile)
     {
         int difference = CalcDiff(clickedTile);
-        if(difference <= currentPlayer.moveRange + currentPlayer.attackRange)
+        if(difference <= currentPlayer.moveRange + currentPlayer.attackRange && difference != currentPlayer.moveRange && difference != 1)
         {
             Result currResult = new Result { distance = 9999 };
 

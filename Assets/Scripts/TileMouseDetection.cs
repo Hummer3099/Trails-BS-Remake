@@ -20,7 +20,7 @@ public class TileMouseDetection : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(0))
         {
-            MovementController.GetInstance().CheckAttack(transform.localPosition);
+            MovementController.GetInstance().CheckMove(transform.localPosition);
         }
     }
 }
