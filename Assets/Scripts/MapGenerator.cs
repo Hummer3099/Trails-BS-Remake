@@ -21,11 +21,12 @@ public class MapGenerator : MonoBehaviour
         {
             instance = this;
         }
+        GenerateMap();
     }
 
     void Start()
     {
-        GenerateMap();
+        
     }
     public static MapGenerator GetInstance()
     {
