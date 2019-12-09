@@ -23,6 +23,5 @@ public class HPBar : MonoBehaviour
     {
         float calcHP = currentHealth / maxHealth;
         HealthBar.transform.localScale = new Vector3(Mathf.Clamp(calcHP, 0, 1), HealthBar.transform.transform.localScale.y, HealthBar.transform.transform.localScale.z);
-
     }
 }
