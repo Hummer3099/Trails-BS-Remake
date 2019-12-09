@@ -114,6 +114,7 @@
     <Compile Include="Assets\Scripts\Tile.cs" />
     <Compile Include="Assets\Scripts\Unit.cs" />
     <Compile Include="Assets\Scripts\UnitController.cs" />
+    <Compile Include="Assets\Scripts\UnitList.cs" />
     <None Include="Assets\GreenForest\PostProcessing\Resources\Shaders\DepthOfField.shader" />
     <None Include="Assets\GreenForest\PostProcessing\Resources\Shaders\MotionBlur.cginc" />
     <None Include="Assets\GreenForest\PostProcessing\Resources\Shaders\Fog.shader" />

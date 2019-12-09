@@ -5,13 +5,14 @@ using UnityEngine;
 
 public class UnitController : MonoBehaviour
 {
-    Unit unit;
+    public Unit unit;
     public GameObject Unit;
 
     public int attack;
     public int defense;
     public int attackRange;
     public int moveRange;
+    public int hp;
     float moveSpeed = 0.3F;
     int currentX;
     int currentY;
@@ -19,11 +20,12 @@ public class UnitController : MonoBehaviour
     Vector3 currentTarget;
     bool isMoving = false;
     Compass compass = new Compass();
+
     void Start()
     {
         InitializeUnit();
         RegisterTile();
-        Move(new Vector3(2.5F, 50, 0.5F));
+        UnitList.GetInstance().GetList().Add(this);
     }
 
     // Update is called once per frame
@@ -34,7 +36,7 @@ public class UnitController : MonoBehaviour
 
     void InitializeUnit()
     {
-        unit = new Unit { attack = attack, defense = defense, attackRange = attackRange, moveRange = moveRange };
+        unit = new Unit { attack = attack, defense = defense, attackRange = attackRange, moveRange = moveRange, hp = hp};
         if (Unit.gameObject.CompareTag("Party"))
         {
             unit.enemy = false;
@@ -83,7 +85,7 @@ public class UnitController : MonoBehaviour
         }
     }
 
-    void Move(Vector3 target)
+    public void Move(Vector3 target)
     {
         Tile[,] tiles = MapGenerator.GetInstance().GetTiles();
 
