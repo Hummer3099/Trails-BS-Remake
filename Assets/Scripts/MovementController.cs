@@ -20,7 +20,7 @@ public class MovementController : MonoBehaviour
     void Update()
     {
         list = UnitList.GetInstance().GetList();
-        currentPlayer = list[0];
+        currentPlayer = list[1];
         //CheckAttack(new Vector3(1.5F, 50, -2.5F));
         //CheckMove(new Vector3(-1.5F, 50, 0.5F));
     }
@@ -32,9 +32,24 @@ public class MovementController : MonoBehaviour
 
     public void CheckMove(Vector3 clickedTile)
     {
-        if(isWithinMovingRange(clickedTile))
+        if(!currentPlayer.unit.enemy)
         {
-            currentPlayer.Move(clickedTile);
+            if (isWithinMovingRange(clickedTile))
+            {
+                currentPlayer.Move(clickedTile);
+            }
+        }
+        else
+        {
+            if(!isWithinMovingRange(clickedTile))
+            {
+                Vector3 newVector = GetClosestPossibleTile(clickedTile);
+                currentPlayer.Move(newVector);
+            }
+            else
+            {
+                currentPlayer.Move(clickedTile);
+            }
         }
     }
 
@@ -57,6 +72,84 @@ public class MovementController : MonoBehaviour
             }
         }
         return false;
+    }
+
+    public Vector3 GetClosestPossibleTile(Vector3 clickedTile)
+    {
+        Vector3 newVector = clickedTile;
+        float offset = 4.6F;
+        int clickedX = (int)(newVector.x + offset);
+        int clickedY = (int)(newVector.z + offset);
+
+        Vector3 playerPosition = currentPlayer.Unit.transform.localPosition;
+
+        int playerX = (int)(playerPosition.x + offset);
+        int playerY = (int)(playerPosition.z + offset);
+
+        bool decreaseX = false;
+        bool decreaseY = false;
+
+        bool sameX = false;
+        bool sameY = false;
+
+        if(playerX < clickedX)
+        {
+            decreaseX = true;
+        }
+        else if(playerX == clickedX)
+        {
+            sameX = true;
+        }
+
+        if(playerY < clickedY)
+        {
+            decreaseY = true;
+        }
+        else if(playerY == clickedY)
+        {
+            sameY = true;
+        }
+
+        int i = 2;
+        int differece = CalcDiff(newVector);
+        while (differece > currentPlayer.moveRange)
+        {
+            if(i%2 == 1)
+            {
+                if(!sameX)
+                {
+                    if (decreaseX)
+                    {
+                        newVector.x = newVector.x - 1;
+                    }
+                    else
+                    {
+                        newVector.x = newVector.x + 1;
+                    }
+                }
+            }
+            else
+            {
+                if(!sameY)
+                {
+                    if (decreaseY)
+                    {
+                        newVector.z = newVector.z - 1;
+
+                        clickedY = (int)(newVector.z + offset);
+                    }
+                    else
+                    {
+                        newVector.z = newVector.z + 1;
+
+                        clickedY = (int)(newVector.z + offset);
+                    }
+                }
+            }
+            i++;
+            differece = CalcDiff(newVector);
+        }
+        return newVector;
     }
 
     public void CheckAttack(Vector3 clickedTile)
