@@ -15,7 +15,7 @@ public class UnitController : MonoBehaviour
     public int moveRange;
     public int hp;
     public float currentHP;
-    float moveSpeed = 0.3F;
+    float moveSpeed = 0.72F;
     int currentX;
     int currentY;
     public Image HealthBar;
@@ -24,6 +24,8 @@ public class UnitController : MonoBehaviour
     Vector3 currentTarget;
     bool isMoving = false;
     Compass compass = new Compass();
+
+    UnitController targetUnit;
 
     void Start()
     {
