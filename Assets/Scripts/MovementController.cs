@@ -9,6 +9,8 @@ public class MovementController : MonoBehaviour
     Tile[,] tiles;
     private static MovementController instance;
 
+    public bool isAnyPlayerMoving = false;
+
     // Start is called before the first frame update
     void Start()
     {

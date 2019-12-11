@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
-
     public Button moveButton;
     public bool isActive=true;
     private static UIController instance;
@@ -18,6 +17,8 @@ public class UIController : MonoBehaviour
         return instance;
     }
 
-   
-  
+    public void ChangeStatus()
+    {
+        isActive = !isActive;
+    }
 }

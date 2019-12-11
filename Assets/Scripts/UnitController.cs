@@ -11,6 +11,7 @@ public class UnitController : MonoBehaviour
 
     public int attack;
     public int defense;
+    public int speed;
     public int attackRange;
     public int moveRange;
     public int hp;
@@ -20,6 +21,8 @@ public class UnitController : MonoBehaviour
     int currentY;
     public Image HealthBar;
     public Text HPtext;
+    public Text attStat;
+    public Text moveStat;
 
     Vector3 currentTarget;
     bool isMoving = false;
@@ -40,11 +43,12 @@ public class UnitController : MonoBehaviour
         CheckMovement();
         UpdateHPBar();
         UpdateHPtext();
+        UpdateStats();
     }
 
     void InitializeUnit()
     {
-        unit = new Unit { attack = attack, defense = defense, attackRange = attackRange, moveRange = moveRange, hp = hp};
+        unit = new Unit { attack = attack, defense = defense, attackRange = attackRange, moveRange = moveRange, hp = hp, speed=speed};
         if (Unit.gameObject.CompareTag("Party"))
         {
             unit.enemy = false;
@@ -104,33 +108,36 @@ public class UnitController : MonoBehaviour
         int nexty = (int)(target.z + offset);
 
         Vector3 origin = Unit.transform.localPosition;
-
-        if(origin.x > target.x)
+        if(!tiles[nextX, nexty].isOccupied())
         {
-            compass.left = true;
-        }
-        else if(origin.x < target.x)
-        {
-            compass.right = true;
-        }
-        
-        if(origin.z < target.z)
-        {
-            compass.up = true;
-        }
-        else if(origin.z > target.z)
-        {
-            compass.down = true;
-        }
+            if (origin.x > target.x)
+            {
+                compass.left = true;
+            }
+            else if (origin.x < target.x)
+            {
+                compass.right = true;
+            }
 
-        isMoving = true;
-        currentTarget = target;
+            if (origin.z < target.z)
+            {
+                compass.up = true;
+            }
+            else if (origin.z > target.z)
+            {
+                compass.down = true;
+            }
 
-        tiles[currentX, currentY].unit = null;
-        tiles[nextX, nexty].unit = unit;
-        UpdateCoordinates();
+            isMoving = true;
+            MovementController.GetInstance().isAnyPlayerMoving = true;
+            currentTarget = target;
 
-        Debug.Log("Assigned at " + nextX + " " + nexty);
+            tiles[currentX, currentY].unit = null;
+            tiles[nextX, nexty].unit = unit;
+            UpdateCoordinates();
+
+            Debug.Log("Assigned at " + nextX + " " + nexty);
+        }
     }
 
     void MoveLeft()
@@ -199,6 +206,8 @@ public class UnitController : MonoBehaviour
         if (compass.isDoneMoving())
         {
             isMoving = false;
+            MovementController.GetInstance().isAnyPlayerMoving = false;
+            UIController.getInstance().isActive = false;
         }
     }
     void UpdateHPBar()
@@ -215,6 +224,11 @@ public class UnitController : MonoBehaviour
     }
     void UpdateHPtext()
     {
-        HPtext.text = "HP: " + currentHP + "/" + hp;
+        HPtext.text = "HP: " + currentHP;
     }
+    void UpdateStats()
+    {
+        attStat.text = "Range: " + attackRange + " " + "Move: " + moveRange;
+    }
+
 }
