@@ -117,6 +117,7 @@
     <Compile Include="Assets\Scripts\Tile.cs" />
     <Compile Include="Assets\Scripts\TileMouseDetection.cs" />
     <Compile Include="Assets\Scripts\TurnButtons.cs" />
+    <Compile Include="Assets\Scripts\TurnController.cs" />
     <Compile Include="Assets\Scripts\UIController.cs" />
     <Compile Include="Assets\Scripts\Unit.cs" />
     <Compile Include="Assets\Scripts\UnitController.cs" />

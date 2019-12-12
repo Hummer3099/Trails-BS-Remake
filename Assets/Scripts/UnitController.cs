@@ -52,12 +52,10 @@ public class UnitController : MonoBehaviour
         if (Unit.gameObject.CompareTag("Party"))
         {
             unit.enemy = false;
-            Debug.Log(Unit.name + " is a party member.");
         }
         else if (Unit.gameObject.CompareTag("Enemy"))
         {
             unit.enemy = true;
-            Debug.Log(Unit.name + " is an enemy.");
         }
     }
 
@@ -66,9 +64,9 @@ public class UnitController : MonoBehaviour
         float offset = 4.6F;
         int x = (int)(Unit.transform.localPosition.x + offset);
         int y = (int)(Unit.transform.localPosition.z + offset);
-        Debug.Log(Unit.name + "  will be added at " + x + " " + y);
+        //Debug.Log(Unit.name + "  will be added at " + x + " " + y);
         MapGenerator.GetInstance().GetTiles()[x, y].unit = unit;
-        Debug.Log(Unit.name + " added at " + x + " " + y);
+        //Debug.Log(Unit.name + " added at " + x + " " + y);
         currentX = x;
         currentY = y;
     }
@@ -208,6 +206,7 @@ public class UnitController : MonoBehaviour
             isMoving = false;
             MovementController.GetInstance().isAnyPlayerMoving = false;
             UIController.getInstance().isActive = false;
+            TurnController.GetInstance().turns.RemoveAt(0);
         }
     }
     void UpdateHPBar()

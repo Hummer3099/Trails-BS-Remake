@@ -7,6 +7,7 @@ ScriptsOnlyBuild:
     - StateController
     - TileMouseDetection
     - TurnButtons
+    - TurnController
     - UIController
     - UnitController
     - UnitList
@@ -108,29 +109,31 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10522}
     - Class: 114
-      Script: {instanceID: 10728}
+      Script: {instanceID: 10674}
     - Class: 114
-      Script: {instanceID: 10946}
+      Script: {instanceID: 10730}
     - Class: 114
-      Script: {instanceID: 11034}
+      Script: {instanceID: 10948}
     - Class: 114
-      Script: {instanceID: 11116}
+      Script: {instanceID: 11036}
     - Class: 114
-      Script: {instanceID: 11134}
+      Script: {instanceID: 11118}
     - Class: 114
-      Script: {instanceID: 11190}
+      Script: {instanceID: 11136}
     - Class: 114
-      Script: {instanceID: 11196}
+      Script: {instanceID: 11192}
     - Class: 114
-      Script: {instanceID: 11210}
+      Script: {instanceID: 11198}
     - Class: 114
-      Script: {instanceID: 11486}
+      Script: {instanceID: 11212}
     - Class: 114
-      Script: {instanceID: 11662}
+      Script: {instanceID: 11488}
     - Class: 114
-      Script: {instanceID: 11748}
+      Script: {instanceID: 11664}
     - Class: 114
-      Script: {instanceID: 11912}
+      Script: {instanceID: 11750}
+    - Class: 114
+      Script: {instanceID: 11914}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -380,6 +383,12 @@ ScriptsOnlyBuild:
     className: Selectable
   - hash:
       serializedVersion: 2
+      Hash: 1d73cac880f821545ad930a6fbed94f6
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: TurnController
+  - hash:
+      serializedVersion: 2
       Hash: b3ab2106268377ffe25dd18ac23dca28
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
@@ -560,7 +569,7 @@ ScriptsOnlyBuild:
     className: TMP_StyleSheet
   - hash:
       serializedVersion: 2
-      Hash: 0507d4125c9e8b368625f5edecf26400
+      Hash: 535f4954857f6331c6a5f20ff9e0cb10
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: MovementController

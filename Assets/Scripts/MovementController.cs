@@ -5,7 +5,7 @@ using UnityEngine;
 public class MovementController : MonoBehaviour
 {
     List<UnitController> list;
-    UnitController currentPlayer;
+    public UnitController currentPlayer;
     Tile[,] tiles;
     private static MovementController instance;
 
@@ -22,14 +22,21 @@ public class MovementController : MonoBehaviour
     void Update()
     {
         list = UnitList.GetInstance().GetList();
-        currentPlayer = list[1];
-        //CheckAttack(new Vector3(1.5F, 50, -2.5F));
-        //CheckMove(new Vector3(-1.5F, 50, 0.5F));
     }
 
     public static MovementController GetInstance()
     {
         return instance;
+    }
+
+    public UnitController GetCurrentPlayer()
+    {
+        return currentPlayer;
+    }
+
+    public void SetCurrentPlayer(UnitController newCurrentPlayer)
+    {
+        currentPlayer = newCurrentPlayer;
     }
 
     public void CheckMove(Vector3 clickedTile)
@@ -43,7 +50,7 @@ public class MovementController : MonoBehaviour
         }
         else
         {
-            if(!isWithinMovingRange(clickedTile))
+            if(!isWithinMovingRange(clickedTile) && currentPlayer.unit.enemy)
             {
                 Vector3 newVector = GetClosestPossibleTile(clickedTile);
                 currentPlayer.Move(newVector);
@@ -64,9 +71,14 @@ public class MovementController : MonoBehaviour
             int clickedX = (int)(clickedTile.x + offset);
             int clickedY = (int)(clickedTile.z + offset);
 
-            if (!tiles[clickedX, clickedY].isOccupied())
+            Debug.Log("Clicked tile is " + clickedX + " " + clickedY);
+
+            if (clickedX >= 0 && clickedY >= 0 && clickedX < tiles.GetLength(0) && clickedY < tiles.GetLength(1))
             {
-                return true;
+                if(!tiles[clickedX, clickedY].isOccupied())
+                {
+                    return true;
+                }
             }
             else
             {
@@ -78,25 +90,24 @@ public class MovementController : MonoBehaviour
 
     public Vector3 GetClosestPossibleTile(Vector3 clickedTile)
     {
-        Vector3 newVector = clickedTile;
+        Vector3 newVector = currentPlayer.Unit.transform.localPosition;
+
         float offset = 4.6F;
-        int clickedX = (int)(newVector.x + offset);
-        int clickedY = (int)(newVector.z + offset);
+        int clickedX = (int)(clickedTile.x + offset);
+        int clickedY = (int)(clickedTile.z + offset);
 
-        Vector3 playerPosition = currentPlayer.Unit.transform.localPosition;
+        int playerX = (int)(newVector.x + offset);
+        int playerY = (int)(newVector.z + offset);
 
-        int playerX = (int)(playerPosition.x + offset);
-        int playerY = (int)(playerPosition.z + offset);
-
-        bool decreaseX = false;
-        bool decreaseY = false;
+        bool increaseX = false;
+        bool increaseY = false;
 
         bool sameX = false;
         bool sameY = false;
 
         if(playerX < clickedX)
         {
-            decreaseX = true;
+            increaseX = true;
         }
         else if(playerX == clickedX)
         {
@@ -105,51 +116,83 @@ public class MovementController : MonoBehaviour
 
         if(playerY < clickedY)
         {
-            decreaseY = true;
+            increaseY = true;
         }
         else if(playerY == clickedY)
         {
             sameY = true;
         }
 
-        int i = 2;
-        int differece = CalcDiff(newVector);
-        while (differece > currentPlayer.moveRange)
+        Debug.Log(sameX + " " + sameY);
+
+        if(sameX)
         {
-            if(i%2 == 1)
+            if(increaseY)
             {
-                if(!sameX)
+                for (int i = 0; i < currentPlayer.moveRange; i++)
                 {
-                    if (decreaseX)
-                    {
-                        newVector.x = newVector.x - 1;
-                    }
-                    else
-                    {
-                        newVector.x = newVector.x + 1;
-                    }
+                    newVector.z = newVector.z + 1F;
                 }
             }
             else
             {
-                if(!sameY)
+                for (int i = 0; i < currentPlayer.moveRange; i++)
                 {
-                    if (decreaseY)
-                    {
-                        newVector.z = newVector.z - 1;
+                    newVector.z = newVector.z - 1F;
+                }
+            }
+        }
 
-                        clickedY = (int)(newVector.z + offset);
+        else if (sameY)
+        {
+            if (increaseX)
+            {
+                for (int i = 0; i < currentPlayer.moveRange; i++)
+                {
+                    newVector.x = newVector.x + 1F;
+                }
+            }
+            else
+            {
+                for (int i = 0; i < currentPlayer.moveRange; i++)
+                {
+                    newVector.x = newVector.x - 1F;
+                }
+            }
+        }
+
+        else
+        {
+            bool isYTurn = false;
+            for(int i = 0; i < currentPlayer.moveRange; i++)
+            {
+                playerX = (int)(newVector.x + offset);
+                playerY = (int)(newVector.z + offset);
+
+                if (isYTurn && playerY != clickedY)
+                {
+                    if(increaseY)
+                    {
+                        newVector.z = newVector.z + 1F;
                     }
                     else
                     {
-                        newVector.z = newVector.z + 1;
-
-                        clickedY = (int)(newVector.z + offset);
+                        newVector.z = newVector.z - 1F;
                     }
                 }
+                else if(!isYTurn && playerX != clickedX)
+                {
+                    if(increaseX)
+                    {
+                        newVector.x = newVector.x + 1F;
+                    }
+                    else
+                    {
+                        newVector.x = newVector.x - 1F;
+                    }
+                }
+                isYTurn = !isYTurn;
             }
-            i++;
-            differece = CalcDiff(newVector);
         }
         return newVector;
     }
@@ -157,36 +200,38 @@ public class MovementController : MonoBehaviour
     public void CheckAttack(Vector3 clickedTile)
     {
         int difference = CalcDiff(clickedTile);
-        if(difference <= currentPlayer.moveRange + currentPlayer.attackRange && difference != currentPlayer.moveRange && difference != 1)
+        Result currResult = new Result { distance = 9999 };
+        if (difference <= currentPlayer.moveRange + currentPlayer.attackRange && difference != currentPlayer.moveRange && difference != 1)
         {
-            Result currResult = new Result { distance = 9999 };
 
-            Vector3 upCheck = new Vector3(clickedTile.x, clickedTile.y, clickedTile.z + 1);
-            Vector3 downCheck = new Vector3(clickedTile.x, clickedTile.y, clickedTile.z - 1);
-            Vector3 rightCheck = new Vector3(clickedTile.x + 1, clickedTile.y, clickedTile.z);
-            Vector3 leftCheck = new Vector3(clickedTile.x - 1, clickedTile.y, clickedTile.z);
+            for(int i = 1; i < currentPlayer.attackRange + 1; i++)
+            {
+                Vector3 upCheck = new Vector3(clickedTile.x, clickedTile.y, clickedTile.z + i);
+                Vector3 downCheck = new Vector3(clickedTile.x, clickedTile.y, clickedTile.z - i);
+                Vector3 rightCheck = new Vector3(clickedTile.x + i, clickedTile.y, clickedTile.z);
+                Vector3 leftCheck = new Vector3(clickedTile.x - i, clickedTile.y, clickedTile.z);
 
-            if (currResult.distance > CheckDistance(upCheck).distance)
-            {
-                currResult = CheckDistance(upCheck);
-                Debug.Log(currResult.distance);
+                if (currResult.distance > CheckDistance(upCheck).distance)
+                {
+                    currResult = CheckDistance(upCheck);
+                    Debug.Log(currResult.distance);
+                }
+                if (currResult.distance > CheckDistance(downCheck).distance)
+                {
+                    currResult = CheckDistance(downCheck);
+                    Debug.Log(currResult.distance);
+                }
+                if (currResult.distance > CheckDistance(rightCheck).distance)
+                {
+                    currResult = CheckDistance(rightCheck);
+                    Debug.Log(currResult.distance);
+                }
+                if (currResult.distance > CheckDistance(leftCheck).distance)
+                {
+                    currResult = CheckDistance(leftCheck);
+                    Debug.Log(currResult.distance);
+                }
             }
-            if (currResult.distance > CheckDistance(downCheck).distance)
-            {
-                currResult = CheckDistance(downCheck);
-                Debug.Log(currResult.distance);
-            }
-            if (currResult.distance > CheckDistance(rightCheck).distance)
-            {
-                currResult = CheckDistance(rightCheck);
-                Debug.Log(currResult.distance);
-            }
-            if (currResult.distance > CheckDistance(leftCheck).distance)
-            {
-                currResult = CheckDistance(leftCheck);
-                Debug.Log(currResult.distance);
-            }
-
             CheckMove(currResult.destination);
         }
     }
@@ -201,6 +246,19 @@ public class MovementController : MonoBehaviour
 
         int playerX = (int)(playerPosition.x + offset);
         int playerY = (int)(playerPosition.z + offset);
+
+        int difference = Mathf.Abs(clickedX - playerX) + Mathf.Abs(clickedY - playerY);
+        return difference;
+    }
+
+    int CalcDiff(Vector3 startingPosition, Vector3 clickedTile)
+    {
+        float offset = 4.6F;
+        int clickedX = (int)(clickedTile.x + offset);
+        int clickedY = (int)(clickedTile.z + offset);
+
+        int playerX = (int)(startingPosition.x + offset);
+        int playerY = (int)(startingPosition.z + offset);
 
         int difference = Mathf.Abs(clickedX - playerX) + Mathf.Abs(clickedY - playerY);
         return difference;

@@ -1121,7 +1121,7 @@ MonoBehaviour:
   Unit: {fileID: 1074182323}
   attack: 7
   defense: 7
-  speed: 0
+  speed: 5
   attackRange: 1
   moveRange: 3
   hp: 15
@@ -4310,6 +4310,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 629998309}
   m_CullTransparentMesh: 0
+--- !u!1 &637195489
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 637195490}
+  - component: {fileID: 637195491}
+  m_Layer: 0
+  m_Name: TurnController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &637195490
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 637195489}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 343.4058, y: 12.771371, z: 291.84756}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &637195491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 637195489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16c9ff66802784443a0204280de87628, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turns: []
 --- !u!1001 &650096299
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5338,7 +5382,7 @@ MonoBehaviour:
   Unit: {fileID: 968696905}
   attack: 10
   defense: 10
-  speed: 0
+  speed: 8
   attackRange: 1
   moveRange: 5
   hp: 10
@@ -9829,7 +9873,7 @@ MonoBehaviour:
   Unit: {fileID: 1067725080}
   attack: 8
   defense: 12
-  speed: 0
+  speed: 7
   attackRange: 2
   moveRange: 3
   hp: 13
@@ -11980,6 +12024,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f3ec43ec6cff574e9c85429856c1cd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentPlayer: {fileID: 0}
+  isAnyPlayerMoving: 0
 --- !u!1001 &1767470612
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12665,8 +12711,8 @@ MonoBehaviour:
   Unit: {fileID: 1101051989}
   attack: 7
   defense: 7
-  speed: 0
-  attackRange: 1
+  speed: 6
+  attackRange: 4
   moveRange: 3
   hp: 15
   currentHP: 7
