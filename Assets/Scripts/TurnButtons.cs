@@ -8,7 +8,7 @@ public class TurnButtons : MonoBehaviour
     public GameObject myButton;
     public GameObject turnPanel;
     public GameObject button;
-    public static int i=2;
+    public static int i=6;
 
     // Start is called before the first frame update
     public void DestroyAndCreate()
