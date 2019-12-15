@@ -8,6 +8,7 @@ public class UnitController : MonoBehaviour
 {
     public Unit unit;
     public GameObject Unit;
+    public RawImage portrait;
 
     public int attack;
     public int defense;
