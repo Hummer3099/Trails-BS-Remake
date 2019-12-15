@@ -13234,7 +13234,7 @@ MonoBehaviour:
   attack: 7
   defense: 7
   speed: 6
-  attackRange: 4
+  attackRange: 2
   moveRange: 3
   hp: 15
   currentHP: 7
