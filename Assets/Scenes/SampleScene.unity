@@ -4353,6 +4353,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16c9ff66802784443a0204280de87628, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  players: []
+  playersCounter: []
   turns: []
 --- !u!1001 &650096299
 PrefabInstance:
@@ -12712,7 +12714,7 @@ MonoBehaviour:
   attack: 7
   defense: 7
   speed: 6
-  attackRange: 4
+  attackRange: 2
   moveRange: 3
   hp: 15
   currentHP: 7

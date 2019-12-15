@@ -201,7 +201,14 @@ public class MovementController : MonoBehaviour
     {
         int difference = CalcDiff(clickedTile);
         Result currResult = new Result { distance = 9999 };
-        if (difference <= currentPlayer.moveRange + currentPlayer.attackRange && difference != currentPlayer.moveRange && difference != 1)
+        if(difference <= currentPlayer.attackRange)
+        {
+            Attack(clickedTile);
+            UIController.getInstance().isActive = false;
+            TurnController.GetInstance().turns.RemoveAt(0);
+        }
+
+        else if (difference <= currentPlayer.moveRange + currentPlayer.attackRange && difference != currentPlayer.moveRange && difference != 1)
         {
 
             for(int i = 1; i < currentPlayer.attackRange + 1; i++)
@@ -233,6 +240,28 @@ public class MovementController : MonoBehaviour
                 }
             }
             CheckMove(currResult.destination);
+            Attack(clickedTile);
+        }
+    }
+
+    void Attack(Vector3 clickedTile)
+    {
+        float offset = 4.6F;
+        int clickedX = (int)(clickedTile.x + offset);
+        int clickedY = (int)(clickedTile.z + offset);
+
+        Unit enemy = tiles[clickedX, clickedY].unit;
+
+        int enemyDefense = enemy.defense / 2;
+        int resultHP = currentPlayer.attack - enemyDefense;
+        if(enemy.hp - resultHP < 0)
+        {
+            enemy.hp = 0;
+            tiles[clickedX, clickedY] = null;
+        }
+        else
+        {
+            enemy.hp -= resultHP;
         }
     }
 
@@ -246,19 +275,6 @@ public class MovementController : MonoBehaviour
 
         int playerX = (int)(playerPosition.x + offset);
         int playerY = (int)(playerPosition.z + offset);
-
-        int difference = Mathf.Abs(clickedX - playerX) + Mathf.Abs(clickedY - playerY);
-        return difference;
-    }
-
-    int CalcDiff(Vector3 startingPosition, Vector3 clickedTile)
-    {
-        float offset = 4.6F;
-        int clickedX = (int)(clickedTile.x + offset);
-        int clickedY = (int)(clickedTile.z + offset);
-
-        int playerX = (int)(startingPosition.x + offset);
-        int playerY = (int)(startingPosition.z + offset);
 
         int difference = Mathf.Abs(clickedX - playerX) + Mathf.Abs(clickedY - playerY);
         return difference;

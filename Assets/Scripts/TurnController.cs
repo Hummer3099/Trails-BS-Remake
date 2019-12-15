@@ -51,6 +51,11 @@ public class TurnController : MonoBehaviour
         return instance;
     }
 
+    public List<UnitController> GetTurnsList()
+    {
+        return turns;
+    }
+
     void CountTurns()
     {
         isCounting = true;

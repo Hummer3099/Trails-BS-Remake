@@ -44,6 +44,23 @@ public class UnitController : MonoBehaviour
         UpdateHPBar();
         UpdateHPtext();
         UpdateStats();
+        UpdateUnitHP();
+        isUnitDead();
+    }
+
+    void UpdateUnitHP()
+    {
+        this.currentHP = unit.hp;
+    }
+
+    void isUnitDead()
+    {
+        if(currentHP ==0)
+        {
+            Destroy(Unit);
+            UnitList.GetInstance().GetList().Remove(this);
+            TurnController.GetInstance().GetTurnsList().Remove(this);
+        }
     }
 
     void InitializeUnit()
