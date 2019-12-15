@@ -21,12 +21,16 @@ public class StateController : MonoBehaviour
 
     void UpdateStateText()
     {
-        if (UIController.getInstance().isActive)
+        if (UIController.getInstance().isMoving)
         {
             stateText.text = "Choose you range tile";
-        }else if (UIController.getInstance().isActive == false)
+        }else if (UIController.getInstance().isMoving == false && UIController.getInstance().isAttacking == false)
         {
             stateText.text = "Choose action";
+        }
+        else if (UIController.getInstance().isAttacking)
+        {
+            stateText.text = "Choose the enemy to attack";
         }
 
     }

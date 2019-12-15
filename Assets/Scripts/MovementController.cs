@@ -22,6 +22,7 @@ public class MovementController : MonoBehaviour
     void Update()
     {
         list = UnitList.GetInstance().GetList();
+        CheckDefend();
     }
 
     public static MovementController GetInstance()
@@ -204,7 +205,7 @@ public class MovementController : MonoBehaviour
         if(difference <= currentPlayer.attackRange)
         {
             Attack(clickedTile);
-            UIController.getInstance().isActive = false;
+            UIController.getInstance().isAttacking = false;
             TurnController.GetInstance().turns.RemoveAt(0);
         }
 
@@ -262,6 +263,20 @@ public class MovementController : MonoBehaviour
         else
         {
             enemy.hp -= resultHP;
+        }
+    }
+    public void Defend()
+    {
+        currentPlayer.isDefendMode = true;
+        currentPlayer.defense += 5;
+        UIController.getInstance().isDefending = false;
+        TurnController.GetInstance().turns.RemoveAt(0);
+    }
+    public void CheckDefend()
+    {
+        if (currentPlayer.isDefendMode) {
+            currentPlayer.isDefendMode = false;
+            currentPlayer.defense -= 5;
         }
     }
 

@@ -6,9 +6,12 @@ public class TileMouseDetection : MonoBehaviour
 {
     private void OnMouseDown()
     {
-        if(Input.GetMouseButtonDown(0) && UIController.getInstance().isActive && !MovementController.GetInstance().isAnyPlayerMoving)
+        if(Input.GetMouseButtonDown(0) && UIController.getInstance().isMoving && !MovementController.GetInstance().isAnyPlayerMoving)
         {
             MovementController.GetInstance().CheckMove(transform.localPosition);
+        }else if (Input.GetMouseButtonDown(0) && UIController.getInstance().isAttacking && !MovementController.GetInstance().isAnyPlayerMoving)
+        {
+            MovementController.GetInstance().CheckAttack(transform.localPosition);
         }
     }
 }

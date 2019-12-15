@@ -8,7 +8,7 @@ public class UnitController : MonoBehaviour
 {
     public Unit unit;
     public GameObject Unit;
-    public RawImage portrait;
+    public GameObject portrait;
 
     public int attack;
     public int defense;
@@ -31,8 +31,17 @@ public class UnitController : MonoBehaviour
 
     UnitController targetUnit;
 
+    public bool isDefendMode;
+    
+    private static UnitController instance;
+    public static UnitController GetInstance()
+    {
+        return instance;
+    }
+
     void Start()
     {
+        instance = this;
         InitializeUnit();
         RegisterTile();
         UnitList.GetInstance().GetList().Add(this);
@@ -52,6 +61,11 @@ public class UnitController : MonoBehaviour
     void UpdateUnitHP()
     {
         this.currentHP = unit.hp;
+    }
+
+    void UpdateUnitDefense()
+    {
+        this.defense = unit.defense;
     }
 
     void isUnitDead()
@@ -223,7 +237,7 @@ public class UnitController : MonoBehaviour
         {
             isMoving = false;
             MovementController.GetInstance().isAnyPlayerMoving = false;
-            UIController.getInstance().isActive = false;
+            UIController.getInstance().isMoving = false;
             TurnController.GetInstance().turns.RemoveAt(0);
         }
     }
@@ -246,6 +260,10 @@ public class UnitController : MonoBehaviour
     void UpdateStats()
     {
         attStat.text = "Range: " + attackRange + " " + "Move: " + moveRange;
+    }
+    public GameObject getRawImage()
+    {
+        return portrait;
     }
 
 }

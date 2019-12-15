@@ -72,6 +72,7 @@ public class TurnController : MonoBehaviour
             playersCounter.Add(playerToRemove);
         }
         isCounting = false;
+        TurnPanel.GetInstance().CreateRawImage();
     }
 
     void ChangePlayer()
