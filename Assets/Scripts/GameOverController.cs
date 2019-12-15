@@ -7,21 +7,50 @@ public class GameOverController : MonoBehaviour
 {
     bool isGameOver = false;
     public int partyCounter;
-    public int deadMembers;
+    public int deadPartyCounter;
+    public int enemyCounter;
+    public int deadEnemyCounter;
     private static GameOverController instance;
+
+    bool haveChecked = false;
 
     void Start()
     {
         instance = this;
         partyCounter = 0;
-        deadMembers = 0;
+        deadPartyCounter = 0;
+        enemyCounter = 0;
+        deadEnemyCounter = 0;
     }
 
     void Update()
     {
-        if (partyCounter == deadMembers && partyCounter != 0 && !MovementController.GetInstance().isAnyPlayerMoving)
+        if(!haveChecked)
+        {
+            List<UnitController> list = UnitList.GetInstance().GetList();
+            if (list != null)
+            {
+                for(int i = 0; i < list.Count; i++)
+                {
+                    if(list[i].unit.enemy)
+                    {
+                        enemyCounter++;
+                    }
+                    else
+                    {
+                        partyCounter++;
+                    }
+                }
+                haveChecked = true;
+            }
+        }
+        if (partyCounter == deadPartyCounter && partyCounter != 0 && !MovementController.GetInstance().isAnyPlayerMoving)
         {
             SceneManager.LoadScene(1);
+        }
+        else if(enemyCounter == deadEnemyCounter && enemyCounter != 0 && !MovementController.GetInstance().isAnyPlayerMoving)
+        {
+            SceneManager.LoadScene(2);
         }
     }
 
@@ -34,8 +63,16 @@ public class GameOverController : MonoBehaviour
     {
         partyCounter++;
     }
-    public void IncreaseDead()
+    public void IncreaseDeadParty()
     {
-        deadMembers++;
+        deadPartyCounter++;
+    }
+    public void IncreaseEnemy()
+    {
+        enemyCounter++;
+    }
+    public void IncreaseDeadEnemy()
+    {
+        deadEnemyCounter++;
     }
 }

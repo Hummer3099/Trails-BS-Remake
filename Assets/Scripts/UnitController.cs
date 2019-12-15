@@ -29,7 +29,7 @@ public class UnitController : MonoBehaviour
     bool isMoving = false;
     Compass compass = new Compass();
 
-    UnitController targetUnit;
+    public bool isDead = false;
 
     public bool isDefendMode;
     
@@ -70,15 +70,20 @@ public class UnitController : MonoBehaviour
 
     void isUnitDead()
     {
-        if(currentHP ==0)
+        if(currentHP ==0 && !isDead)
         {
             if(!unit.enemy)
             {
-                GameOverController.GetInstance().IncreaseDead();
+                GameOverController.GetInstance().IncreaseDeadParty();
+            }
+            else
+            {
+                GameOverController.GetInstance().IncreaseDeadEnemy();
             }
             Destroy(Unit);
             UnitList.GetInstance().GetList().Remove(this);
             TurnController.GetInstance().GetTurnsList().Remove(this);
+            isDead = true;
         }
     }
 
@@ -88,7 +93,6 @@ public class UnitController : MonoBehaviour
         if (Unit.gameObject.CompareTag("Party"))
         {
             unit.enemy = false;
-            GameOverController.GetInstance().IncreaseParty();
         }
         else if (Unit.gameObject.CompareTag("Enemy"))
         {
@@ -101,9 +105,7 @@ public class UnitController : MonoBehaviour
         float offset = 4.6F;
         int x = (int)(Unit.transform.localPosition.x + offset);
         int y = (int)(Unit.transform.localPosition.z + offset);
-        //Debug.Log(Unit.name + "  will be added at " + x + " " + y);
         MapGenerator.GetInstance().GetTiles()[x, y].unit = unit;
-        //Debug.Log(Unit.name + " added at " + x + " " + y);
         currentX = x;
         currentY = y;
     }
@@ -259,6 +261,10 @@ public class UnitController : MonoBehaviour
         }else if(calcHP < 0.33)
         {
             HealthBar.GetComponent<Image>().color = new Color(255,0, 0);
+        }
+        else
+        {
+            HealthBar.GetComponent<Image>().color = new Color(0, 255, 0);
         }
     }
     void UpdateHPtext()

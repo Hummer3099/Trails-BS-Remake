@@ -252,6 +252,7 @@ public class MovementController : MonoBehaviour
             CheckMove(currResult.destination);
             Attack(clickedTile);
             Debug.Log("Attacked!");
+            UIController.getInstance().isAttacking = false;
         }
     }
 

@@ -34,17 +34,18 @@ public class TurnController : MonoBehaviour
             ChangePlayer();
             isInitiated = true;
         }
-        if(players.Count != playersCounter.Count)
+        if (players.Count != playersCounter.Count)
         {
             playersCounter = players;
         }
-        
-        if(turns.Count < 6 && isDoneSorting)
+
+        if (turns.Count < 6 && isDoneSorting)
         {
+            CheckDeaths();
             CountTurns();
             ChangePlayer();
         }
-        if(turns[0].unit.enemy && !MovementController.GetInstance().isAnyPlayerMoving)
+        if (turns[0].unit.enemy && !MovementController.GetInstance().isAnyPlayerMoving)
         {
             EnemyTurn();
         }
@@ -66,7 +67,7 @@ public class TurnController : MonoBehaviour
         while (turns.Count < 6)
         {
             playersCounter[0].unit.addSpeed();
-            if(playersCounter[0].unit.isSpeedAchieved())
+            if (playersCounter[0].unit.isSpeedAchieved() && !playersCounter[0].isDead)
             {
                 turns.Add(playersCounter[0]);
                 isCounting = false;
@@ -79,9 +80,20 @@ public class TurnController : MonoBehaviour
         TurnPanel.GetInstance().CreateRawImage();
     }
 
+    void CheckDeaths()
+    {
+        for(int i = 0; i < turns.Count; i++)
+        {
+            if(turns[i].unit.isDead)
+            {
+                turns.RemoveAt(i);
+            }
+        }
+    }
+
     void ChangePlayer()
     {
-        if(turns[0] != MovementController.GetInstance().GetCurrentPlayer())
+        if (turns[0] != MovementController.GetInstance().GetCurrentPlayer())
         {
             MovementController.GetInstance().SetCurrentPlayer(turns[0]);
         }
@@ -91,11 +103,11 @@ public class TurnController : MonoBehaviour
     {
         Unit Unit = null;
         float lowestHP = 0;
-        for(int i = 0; i < players.Count; i++)
+        for (int i = 0; i < players.Count; i++)
         {
-            if(Unit == null)
+            if (Unit == null)
             {
-                if(!players[i].unit.enemy)
+                if (!players[i].unit.enemy)
                 {
                     Unit = players[i].unit;
                     lowestHP = players[i].currentHP;
@@ -103,9 +115,9 @@ public class TurnController : MonoBehaviour
             }
             else
             {
-                if(lowestHP > players[i].currentHP)
+                if (lowestHP > players[i].currentHP)
                 {
-                    if(!players[i].unit.enemy && !players[i].unit.isDead)
+                    if (!players[i].unit.enemy && !players[i].unit.isDead)
                     {
                         Unit = players[i].unit;
                         lowestHP = players[i].currentHP;
@@ -116,12 +128,12 @@ public class TurnController : MonoBehaviour
 
         Tile[,] tiles = MapGenerator.GetInstance().GetTiles();
         Tile matchedTile = null;
-        
-        for(int i = 0; i < tiles.GetLength(0); i++)
+
+        for (int i = 0; i < tiles.GetLength(0); i++)
         {
-            for(int j = 0; j < tiles.GetLength(1); j++)
+            for (int j = 0; j < tiles.GetLength(1); j++)
             {
-                if(tiles[i, j].unit == Unit)
+                if (tiles[i, j].unit == Unit)
                 {
                     matchedTile = tiles[i, j];
                     Debug.Log("Tile is " + i + " " + j);
@@ -130,7 +142,7 @@ public class TurnController : MonoBehaviour
                 }
             }
         }
-        if(MovementController.GetInstance().isWithinAttackRange(matchedTile.floor.transform.localPosition))
+        if (MovementController.GetInstance().isWithinAttackRange(matchedTile.floor.transform.localPosition))
         {
             MovementController.GetInstance().CheckAttack(matchedTile.floor.transform.localPosition);
         }
@@ -145,19 +157,19 @@ public class TurnController : MonoBehaviour
         List<UnitController> sortedList = new List<UnitController>();
         List<UnitController> unsortedList = players.GetRange(0, players.Count);
 
-        while(!isDoneSorting)
+        while (!isDoneSorting)
         {
             int indexSpeed = 0;
             UnitController highestSpeed = unsortedList[0];
-            for(int i = 0; i < unsortedList.Count; i++)
+            for (int i = 0; i < unsortedList.Count; i++)
             {
-                if(unsortedList[i].speed > highestSpeed.speed)
+                if (unsortedList[i].speed > highestSpeed.speed)
                 {
                     highestSpeed = unsortedList[i];
                     indexSpeed = i;
                 }
             }
-            if(unsortedList.Count == 1)
+            if (unsortedList.Count == 1)
             {
                 UnitController playerToRemove = unsortedList[0];
                 unsortedList.RemoveAt(0);
