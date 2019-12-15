@@ -72,6 +72,10 @@ public class UnitController : MonoBehaviour
     {
         if(currentHP ==0)
         {
+            if(!unit.enemy)
+            {
+                GameOverController.GetInstance().IncreaseDead();
+            }
             Destroy(Unit);
             UnitList.GetInstance().GetList().Remove(this);
             TurnController.GetInstance().GetTurnsList().Remove(this);
@@ -84,6 +88,7 @@ public class UnitController : MonoBehaviour
         if (Unit.gameObject.CompareTag("Party"))
         {
             unit.enemy = false;
+            GameOverController.GetInstance().IncreaseParty();
         }
         else if (Unit.gameObject.CompareTag("Enemy"))
         {
@@ -135,38 +140,41 @@ public class UnitController : MonoBehaviour
 
         float offset = 4.6F;
         int nextX = (int) (target.x + offset);
-        int nexty = (int)(target.z + offset);
+        int nextY = (int)(target.z + offset);
 
         Vector3 origin = Unit.transform.localPosition;
-        if(!tiles[nextX, nexty].isOccupied())
+        if(nextX >= 0 && nextY >= 0 && nextX < tiles.GetLength(0) && nextY < tiles.GetLength(1))
         {
-            if (origin.x > target.x)
+            if (!tiles[nextX, nextY].isOccupied())
             {
-                compass.left = true;
-            }
-            else if (origin.x < target.x)
-            {
-                compass.right = true;
-            }
+                if (origin.x > target.x)
+                {
+                    compass.left = true;
+                }
+                else if (origin.x < target.x)
+                {
+                    compass.right = true;
+                }
 
-            if (origin.z < target.z)
-            {
-                compass.up = true;
+                if (origin.z < target.z)
+                {
+                    compass.up = true;
+                }
+                else if (origin.z > target.z)
+                {
+                    compass.down = true;
+                }
+
+                isMoving = true;
+                MovementController.GetInstance().isAnyPlayerMoving = true;
+                currentTarget = target;
+
+                tiles[currentX, currentY].unit = null;
+                tiles[nextX, nextY].unit = unit;
+                UpdateCoordinates();
+
+                Debug.Log("Assigned at " + nextX + " " + nextY);
             }
-            else if (origin.z > target.z)
-            {
-                compass.down = true;
-            }
-
-            isMoving = true;
-            MovementController.GetInstance().isAnyPlayerMoving = true;
-            currentTarget = target;
-
-            tiles[currentX, currentY].unit = null;
-            tiles[nextX, nexty].unit = unit;
-            UpdateCoordinates();
-
-            Debug.Log("Assigned at " + nextX + " " + nexty);
         }
     }
 

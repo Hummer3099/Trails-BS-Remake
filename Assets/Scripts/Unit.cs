@@ -16,6 +16,7 @@ public class Unit
     public float accuracy { get; set; }
     public float evasion { get; set; }
     public bool enemy { get; set; }
+    public bool isDead = false;
 
     public bool isEnemy()
     {

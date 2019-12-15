@@ -44,6 +44,10 @@ public class TurnController : MonoBehaviour
             CountTurns();
             ChangePlayer();
         }
+        if(turns[0].unit.enemy && !MovementController.GetInstance().isAnyPlayerMoving)
+        {
+            EnemyTurn();
+        }
     }
 
     public static TurnController GetInstance()
@@ -80,6 +84,59 @@ public class TurnController : MonoBehaviour
         if(turns[0] != MovementController.GetInstance().GetCurrentPlayer())
         {
             MovementController.GetInstance().SetCurrentPlayer(turns[0]);
+        }
+    }
+
+    void EnemyTurn()
+    {
+        Unit Unit = null;
+        float lowestHP = 0;
+        for(int i = 0; i < players.Count; i++)
+        {
+            if(Unit == null)
+            {
+                if(!players[i].unit.enemy)
+                {
+                    Unit = players[i].unit;
+                    lowestHP = players[i].currentHP;
+                }
+            }
+            else
+            {
+                if(lowestHP > players[i].currentHP)
+                {
+                    if(!players[i].unit.enemy && !players[i].unit.isDead)
+                    {
+                        Unit = players[i].unit;
+                        lowestHP = players[i].currentHP;
+                    }
+                }
+            }
+        }
+
+        Tile[,] tiles = MapGenerator.GetInstance().GetTiles();
+        Tile matchedTile = null;
+        
+        for(int i = 0; i < tiles.GetLength(0); i++)
+        {
+            for(int j = 0; j < tiles.GetLength(1); j++)
+            {
+                if(tiles[i, j].unit == Unit)
+                {
+                    matchedTile = tiles[i, j];
+                    Debug.Log("Tile is " + i + " " + j);
+                    i = 100;
+                    j = 100;
+                }
+            }
+        }
+        if(MovementController.GetInstance().isWithinAttackRange(matchedTile.floor.transform.localPosition))
+        {
+            MovementController.GetInstance().CheckAttack(matchedTile.floor.transform.localPosition);
+        }
+        else
+        {
+            MovementController.GetInstance().CheckMove(matchedTile.floor.transform.localPosition);
         }
     }
 
