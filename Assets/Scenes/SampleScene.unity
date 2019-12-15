@@ -1183,7 +1183,7 @@ GameObject:
   - component: {fileID: 183761030}
   m_Layer: 0
   m_Name: Enemy2Controller
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1206,7 +1206,7 @@ MonoBehaviour:
   defense: 7
   speed: 5
   attackRange: 1
-  moveRange: 3
+  moveRange: 5
   hp: 15
   currentHP: 3
   HealthBar: {fileID: 1462310490}
@@ -5065,6 +5065,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: knight
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 3ddc4c92a2b077f42af37105a6f255a8,
+        type: 3}
+      propertyPath: m_TagString
+      value: Party
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ddc4c92a2b077f42af37105a6f255a8, type: 3}
 --- !u!1 &705507993
@@ -5630,7 +5635,7 @@ GameObject:
   - component: {fileID: 779580561}
   m_Layer: 0
   m_Name: Party1Controller
-  m_TagString: Untagged
+  m_TagString: Party
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6490,7 +6495,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 240f58a4e489d0f41b8b3cb2ff95a872,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.6150009
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 240f58a4e489d0f41b8b3cb2ff95a872,
         type: 3}
@@ -6500,7 +6505,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 240f58a4e489d0f41b8b3cb2ff95a872,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.379999
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 240f58a4e489d0f41b8b3cb2ff95a872,
         type: 3}
@@ -6561,6 +6566,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: IronMan
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 240f58a4e489d0f41b8b3cb2ff95a872,
+        type: 3}
+      propertyPath: m_TagString
+      value: Party
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 240f58a4e489d0f41b8b3cb2ff95a872, type: 3}
@@ -10274,7 +10284,7 @@ GameObject:
   - component: {fileID: 1544301082}
   m_Layer: 0
   m_Name: Party2Controller
-  m_TagString: Untagged
+  m_TagString: Party
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10297,7 +10307,7 @@ MonoBehaviour:
   defense: 12
   speed: 7
   attackRange: 2
-  moveRange: 3
+  moveRange: 5
   hp: 13
   currentHP: 8
   HealthBar: {fileID: 2038584185}
@@ -12545,6 +12555,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wolf_One_obj
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: b824a5a133811044d986a8f9cc4559c7,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b824a5a133811044d986a8f9cc4559c7, type: 3}
 --- !u!1001 &1767470612
@@ -13212,7 +13227,7 @@ GameObject:
   - component: {fileID: 1835830139}
   m_Layer: 0
   m_Name: Enemy1Controller
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13235,7 +13250,7 @@ MonoBehaviour:
   defense: 7
   speed: 6
   attackRange: 2
-  moveRange: 3
+  moveRange: 4
   hp: 15
   currentHP: 7
   HealthBar: {fileID: 54035613}
@@ -14108,6 +14123,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Only_Spider_with_Animations_Export
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 875a6de851af8ea409beafae1a3461e5,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 875a6de851af8ea409beafae1a3461e5, type: 3}

@@ -50,15 +50,8 @@ public class MovementController : MonoBehaviour
         }
         else
         {
-            if(!isWithinMovingRange(clickedTile) && currentPlayer.unit.enemy)
-            {
-                Vector3 newVector = GetClosestPossibleTile(clickedTile);
-                currentPlayer.Move(newVector);
-            }
-            else
-            {
-                currentPlayer.Move(clickedTile);
-            }
+            Vector3 newVector = GetClosestPossibleTile(clickedTile);
+            currentPlayer.Move(newVector);
         }
     }
 
@@ -71,14 +64,32 @@ public class MovementController : MonoBehaviour
             int clickedX = (int)(clickedTile.x + offset);
             int clickedY = (int)(clickedTile.z + offset);
 
-            Debug.Log("Clicked tile is " + clickedX + " " + clickedY);
-
             if (clickedX >= 0 && clickedY >= 0 && clickedX < tiles.GetLength(0) && clickedY < tiles.GetLength(1))
             {
                 if(!tiles[clickedX, clickedY].isOccupied())
                 {
                     return true;
                 }
+            }
+            else
+            {
+                return false;
+            }
+        }
+        return false;
+    }
+    public bool isWithinAttackRange(Vector3 clickedTile)
+    {
+        int difference = CalcDiff(clickedTile);
+        if (difference <= currentPlayer.moveRange + currentPlayer.attackRange)
+        {
+            float offset = 4.6F;
+            int clickedX = (int)(clickedTile.x + offset);
+            int clickedY = (int)(clickedTile.z + offset);
+
+            if (clickedX >= 0 && clickedY >= 0 && clickedX < tiles.GetLength(0) && clickedY < tiles.GetLength(1))
+            {
+                return true;
             }
             else
             {
@@ -122,8 +133,6 @@ public class MovementController : MonoBehaviour
         {
             sameY = true;
         }
-
-        Debug.Log(sameX + " " + sameY);
 
         if(sameX)
         {
@@ -241,6 +250,7 @@ public class MovementController : MonoBehaviour
             }
             CheckMove(currResult.destination);
             Attack(clickedTile);
+            Debug.Log("Attacked!");
         }
     }
 
@@ -258,6 +268,7 @@ public class MovementController : MonoBehaviour
         {
             enemy.hp = 0;
             tiles[clickedX, clickedY] = null;
+            enemy.isDead = true;
         }
         else
         {
