@@ -101,47 +101,37 @@ public class TurnController : MonoBehaviour
 
     void EnemyTurn()
     {
-        Unit Unit = null;
-        float lowestHP = 0;
+        UnitController Unit = null;
+        float highestHP = 0;
         for (int i = 0; i < players.Count; i++)
         {
             if (Unit == null)
             {
                 if (!players[i].unit.enemy)
                 {
-                    Unit = players[i].unit;
-                    lowestHP = players[i].currentHP;
+                    Unit = players[i];
+                    highestHP = players[i].currentHP;
                 }
             }
             else
             {
-                if (lowestHP > players[i].currentHP)
+                if (highestHP < players[i].currentHP)
                 {
                     if (!players[i].unit.enemy && !players[i].unit.isDead)
                     {
-                        Unit = players[i].unit;
-                        lowestHP = players[i].currentHP;
+                        Unit = players[i];
+                        highestHP = players[i].currentHP;
                     }
                 }
             }
         }
+        float offset = 4.6F;
+        int x = (int)(Unit.Unit.transform.localPosition.x + offset);
+        int y = (int)(Unit.Unit.transform.localPosition.z + offset);
 
         Tile[,] tiles = MapGenerator.GetInstance().GetTiles();
-        Tile matchedTile = null;
+        Tile matchedTile = tiles[x, y];
 
-        for (int i = 0; i < tiles.GetLength(0); i++)
-        {
-            for (int j = 0; j < tiles.GetLength(1); j++)
-            {
-                if (tiles[i, j].unit == Unit)
-                {
-                    matchedTile = tiles[i, j];
-                    Debug.Log("Tile is " + i + " " + j);
-                    i = 100;
-                    j = 100;
-                }
-            }
-        }
         if (MovementController.GetInstance().isWithinAttackRange(matchedTile.floor.transform.localPosition))
         {
             MovementController.GetInstance().CheckAttack(matchedTile.floor.transform.localPosition);

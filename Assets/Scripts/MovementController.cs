@@ -269,7 +269,7 @@ public class MovementController : MonoBehaviour
         if(enemy.hp - resultHP < 0)
         {
             enemy.hp = 0;
-            tiles[clickedX, clickedY] = null;
+            tiles[clickedX, clickedY].unit = null;
             enemy.isDead = true;
         }
         else

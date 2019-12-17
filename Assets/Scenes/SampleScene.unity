@@ -1144,6 +1144,7 @@ MonoBehaviour:
   HPtext: {fileID: 97834009}
   attStat: {fileID: 1898441002}
   moveStat: {fileID: 0}
+  isDead: 0
   isDefendMode: 0
 --- !u!4 &183761031
 Transform:
@@ -4541,7 +4542,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Party1Name
+  m_Text: Knight
 --- !u!222 &663997316
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5388,6 +5389,7 @@ MonoBehaviour:
   HPtext: {fileID: 292435071}
   attStat: {fileID: 1280987024}
   moveStat: {fileID: 0}
+  isDead: 0
   isDefendMode: 0
 --- !u!4 &779580562
 Transform:
@@ -8994,6 +8996,8 @@ MonoBehaviour:
   isMoving: 0
   isAttacking: 0
   isDefending: 0
+  red: {fileID: 2100000, guid: 169f003a1244f6e4d8787473769c2748, type: 2}
+  grass: {fileID: 2100000, guid: 8a38a8760dcb824439510b41845cf0e7, type: 2}
 --- !u!4 &1394964180
 Transform:
   m_ObjectHideFlags: 0
@@ -10006,6 +10010,7 @@ MonoBehaviour:
   HPtext: {fileID: 1768676511}
   attStat: {fileID: 1743631251}
   moveStat: {fileID: 0}
+  isDead: 0
   isDefendMode: 0
 --- !u!4 &1544301083
 Transform:
@@ -10984,7 +10989,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   partyCounter: 0
-  deadMembers: 0
+  deadPartyCounter: 0
+  enemyCounter: 0
+  deadEnemyCounter: 0
 --- !u!4 &1625082909
 Transform:
   m_ObjectHideFlags: 0
@@ -11837,7 +11844,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Party2Name
+  m_Text: Iron Man
 --- !u!222 &1733102164
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -13007,6 +13014,7 @@ MonoBehaviour:
   HPtext: {fileID: 1541858069}
   attStat: {fileID: 880504566}
   moveStat: {fileID: 0}
+  isDead: 0
   isDefendMode: 0
 --- !u!4 &1835830140
 Transform:

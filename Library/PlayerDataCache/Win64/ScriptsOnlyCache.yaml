@@ -1,13 +1,15 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
+    - GameOverController
     - HPBar
     - MapGenerator
     - MovementController
+    - Retry
     - StateController
     - TileMouseDetection
-    - TurnButtons
     - TurnController
+    - TurnPanel
     - UIController
     - UnitController
     - UnitList
@@ -30,6 +32,7 @@ ScriptsOnlyBuild:
     - TMPro.TMP_Settings
     - TMPro.TMP_SpriteAsset
     - TMPro.TMP_StyleSheet
+    - TMPro.TextMeshProUGUI
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
@@ -47,8 +50,62 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.HorizontalLayoutGroup
     - UnityEngine.UI.Image
+    - UnityEngine.UI.RawImage
     - UnityEngine.UI.Text
   sceneClasses:
+    Assets/Scenes/GameOver.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 108
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 9818}
+    - Class: 114
+      Script: {instanceID: 10006}
+    - Class: 114
+      Script: {instanceID: 10052}
+    - Class: 114
+      Script: {instanceID: 10494}
+    - Class: 114
+      Script: {instanceID: 10948}
+    - Class: 114
+      Script: {instanceID: 11030}
+    - Class: 114
+      Script: {instanceID: 11200}
+    - Class: 114
+      Script: {instanceID: 11422}
+    - Class: 114
+      Script: {instanceID: 11494}
+    - Class: 114
+      Script: {instanceID: 11920}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 128
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
+      Script: {instanceID: 0}
     Assets/Scenes/SampleScene.unity:
     - Class: 1
       Script: {instanceID: 0}
@@ -103,8 +160,6 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10302}
     - Class: 114
-      Script: {instanceID: 10318}
-    - Class: 114
       Script: {instanceID: 10494}
     - Class: 114
       Script: {instanceID: 10522}
@@ -115,25 +170,31 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10948}
     - Class: 114
-      Script: {instanceID: 11036}
+      Script: {instanceID: 10970}
     - Class: 114
-      Script: {instanceID: 11118}
+      Script: {instanceID: 11038}
     - Class: 114
-      Script: {instanceID: 11136}
+      Script: {instanceID: 11120}
     - Class: 114
-      Script: {instanceID: 11192}
+      Script: {instanceID: 11138}
     - Class: 114
-      Script: {instanceID: 11198}
+      Script: {instanceID: 11194}
     - Class: 114
-      Script: {instanceID: 11212}
+      Script: {instanceID: 11200}
     - Class: 114
-      Script: {instanceID: 11488}
+      Script: {instanceID: 11214}
     - Class: 114
-      Script: {instanceID: 11664}
+      Script: {instanceID: 11282}
     - Class: 114
-      Script: {instanceID: 11750}
+      Script: {instanceID: 11346}
     - Class: 114
-      Script: {instanceID: 11914}
+      Script: {instanceID: 11494}
+    - Class: 114
+      Script: {instanceID: 11670}
+    - Class: 114
+      Script: {instanceID: 11756}
+    - Class: 114
+      Script: {instanceID: 11920}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -157,6 +218,59 @@ ScriptsOnlyBuild:
     - Class: 224
       Script: {instanceID: 0}
     - Class: 1953259897
+      Script: {instanceID: 0}
+    Assets/Scenes/YouWin.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 108
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 9818}
+    - Class: 114
+      Script: {instanceID: 10006}
+    - Class: 114
+      Script: {instanceID: 10052}
+    - Class: 114
+      Script: {instanceID: 10494}
+    - Class: 114
+      Script: {instanceID: 10948}
+    - Class: 114
+      Script: {instanceID: 11030}
+    - Class: 114
+      Script: {instanceID: 11200}
+    - Class: 114
+      Script: {instanceID: 11422}
+    - Class: 114
+      Script: {instanceID: 11494}
+    - Class: 114
+      Script: {instanceID: 11920}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 128
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
       Script: {instanceID: 0}
   scriptHashData:
   - hash:
@@ -455,7 +569,13 @@ ScriptsOnlyBuild:
     className: RawImage
   - hash:
       serializedVersion: 2
-      Hash: 4d5a3df4bcc6b29314551fcfad8d454e
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Retry
+  - hash:
+      serializedVersion: 2
+      Hash: 28825069e14d3839521b7fd341fff232
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: UIController
@@ -473,7 +593,7 @@ ScriptsOnlyBuild:
     className: StateController
   - hash:
       serializedVersion: 2
-      Hash: 2a93e7d21eb49855871aa6a9d4f2f754
+      Hash: ea911cd9e624ebd8a8064258ba6667ab
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: UnitController
@@ -521,10 +641,22 @@ ScriptsOnlyBuild:
     className: Physics2DRaycaster
   - hash:
       serializedVersion: 2
+      Hash: 75efeae2aba880dd91e69057051ba47e
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: GameOverController
+  - hash:
+      serializedVersion: 2
       Hash: c1933cc0a2f4ff6eb13333347497beb3
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: TimelineAsset
+  - hash:
+      serializedVersion: 2
+      Hash: 2a57d667254b60550f16eaaa9ebb16a3
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: TurnPanel
   - hash:
       serializedVersion: 2
       Hash: 3b760e6526e13f7504f59e210145899a
@@ -666,4 +798,6 @@ ScriptsOnlyBuild:
   platform: 19
   scenePathNames:
   - Assets/Scenes/SampleScene.unity
-  playerPath: C:/Repos/PRO1/Trails BS Remake/Trails BS Remake/Build/Trails BS Remake.exe
+  - Assets/Scenes/GameOver.unity
+  - Assets/Scenes/YouWin.unity
+  playerPath: C:/Repos/PRO1/Trails BS Remake/Build/Trails BS Remake.exe
